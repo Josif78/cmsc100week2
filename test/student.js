@@ -5,8 +5,9 @@ var should = require('should-http'),
 describe('student', function() {
 	var url = "http://localhost:5000";
 	var studInfo = {
-		'name': 'Uni',
-		'studno': '2014-10000'
+		'id': 9,
+		'name' : 'Rom',
+		'studno' : '2014-40000'
 	};
 
 	describe('find()', function() {
@@ -44,9 +45,12 @@ describe('student', function() {
 			.end(function(err, res) {
 				if(err) throw err;
 				res.should.have.status(200);
-				studInfo.should.have.properties({
-					'name': 'Uni', 
-					'studno': '2014-10000'
+				res.body.should.be.an.instanceOf(Object);
+				//res.body.should('name').be.type('string');
+				res.body.should.have.properties({
+					'id': '9',
+					'name': 'Rom',
+					'studno': '2014-40000'
 				});
 				done();
 			});
